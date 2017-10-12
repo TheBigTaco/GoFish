@@ -21,7 +21,7 @@ namespace GoFish.Models
       Rank = rank;
     }
 
-    public static void DeckGenerator()
+    private static void DeckGenerator()
     {
       for (int i = 0; i < 4; i++)
       {
@@ -43,9 +43,15 @@ namespace GoFish.Models
 
     public static void StartGame(int playerCount)
     {
-      for (int j = 0; j < playerCount; j++)
+      if (_deck.Count > 0)
       {
-        Player player = new Player(j);
+      }
+      else {
+        DeckGenerator();
+        for (int j = 0; j < playerCount; j++)
+        {
+          Player player = new Player(j);
+        }
       }
       Console.WriteLine(_deck.Count);
     }

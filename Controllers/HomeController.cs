@@ -15,7 +15,6 @@ namespace GoFish.Controllers
       [HttpPost("/start")]
       public ActionResult StartGame()
       {
-        Game.DeckGenerator();
         Game.StartGame(int.Parse(Request.Form["player-amount"]));
         List<Player> players = new List<Player>{};
         for (int i = 0; i < int.Parse(Request.Form["player-amount"]); i++)
