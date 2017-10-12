@@ -17,9 +17,14 @@ namespace GoFish.Controllers
       {
         Game.DeckGenerator();
         Game.StartGame(int.Parse(Request.Form["player-amount"]));
-        Player player = Player.Find(1);
+        List<Player> players = new List<Player>{};
+        for (int i = 0; i < int.Parse(Request.Form["player-amount"]); i++)
+        {
+          Player player = Player.Find(i);
+          players.Add(player);
+        }
 
-        return View(player.GetHand());
+        return View(players);
       }
     }
 }

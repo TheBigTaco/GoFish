@@ -19,13 +19,13 @@ namespace GoFish.Models
         _hand.Add(deck[card]);
         Game.SetDeck(card);
       }
-      Id = id;
+      Id = id + 1;
       _players.Add(this);
     }
 
     public static Player Find(int id)
     {
-      return _players[id-1];
+      return _players[id];
     }
 
     public static Random GetRandomGame()

@@ -1,6 +1,40 @@
-<ul>
-  @foreach(var card in Model)
-  {
-    <li>@card.Rank of @card.Suit</li>
-  }
-</ul>
+@using System.Collections.Generic;
+
+@foreach (var player in Model)
+{
+  <h1>Player @player.Id@Html.Raw("'s") Hand</h1>
+  <ul>
+    @foreach (var card in player.GetHand())
+    {
+      <li>@card.Rank of @card.Suit</li>
+    }
+  </ul>
+  <form action="/start/player/" method="post">
+    <select name="player-choice" id="player-choice">
+    @foreach(var person in Model)
+    {
+      <option>player @person.Id</option>
+    }
+    </select>
+    <button type="submit" name="button">Do you have any...</button>
+    <select name="card-value" id="card-value">
+      @{
+      for (int i = 0; i < player.GetHand().Count; i++)
+      {
+        bool matchFound = false;
+        for (int j = i+1; j < player.GetHand().Count; j++)
+        {
+          if (player.GetHand()[i].Rank == player.GetHand()[j].Rank)
+          {
+            matchFound = true;
+            break;
+          }
+        }
+        if (matchFound == false)
+        {
+          <option>@player.GetHand()[i].Rank@Html.Raw("s")</option>
+        }
+      }}
+    </select>
+  </form>
+}
