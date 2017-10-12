@@ -1,24 +1,21 @@
 using System;
 using System.Collections.Generic;
-// using System.Random;
 
 namespace GoFish.Models
 {
-  public class Card
+  public class Game
   {
     private static List<string> _suits = new List<string> {"Hearts", "Diamonds", "Spades", "Clubs"};
 
     private static List<string> _rank = new List<string> {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
 
-    private static List<Card> _deck = new List<Card>{};
-
-    private static List<Card> _playerOne = new List<Card>{};
+    private static List<Game> _deck = new List<Game>{};
 
     public string Suit { get; set; }
     public string Rank { get; set; }
-    private static Random _randomCard = new Random();
 
-    public Card (string suit, string rank)
+
+    public Game (string suit, string rank)
     {
       Suit = suit;
       Rank = rank;
@@ -30,21 +27,27 @@ namespace GoFish.Models
       {
         for (int j = 0; j < 13; j++)
         {
-          _deck.Add(new Card(_suits[i], _rank[j]));
+          _deck.Add(new Game(_suits[i], _rank[j]));
         }
       }
     }
 
-    public static List<Card> DrawHand()
+    public static List<Game> GetDeck()
     {
-      for (int i = 0; i < 5; i++)
+      return _deck;
+    }
+    public static void SetDeck(int card)
+    {
+      _deck.RemoveAt(card);
+    }
+
+    public static void StartGame(int playerCount)
+    {
+      for (int j = 0; j < playerCount; j++)
       {
-        int card = _randomCard.Next(0, _deck.Count);
-        _playerOne.Add(_deck[card]);
-        _deck.RemoveAt(card);
+        Player player = new Player(j);
       }
       Console.WriteLine(_deck.Count);
-      return _playerOne;
     }
   }
 }

@@ -1,6 +1,5 @@
-<ul>
-  @foreach (var card in Model)
-  {
-    <li>@card.Rank of @card.Suit</li>
-  }
-</ul>
+<form action="/start" method="post">
+  <label for="player-amount">How Many Players?</label>
+  <input type="text" name="player-amount" id="player-amount">
+  <button type="submit" name="button">Play Game</button>
+</form>

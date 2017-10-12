@@ -10,9 +10,16 @@ namespace GoFish.Controllers
       [HttpGet("/")]
       public ActionResult Index()
       {
-        Card.DeckGenerator();
-        List<Card> playerHand = Card.DrawHand();
-        return View(playerHand);
+        return View();
+      }
+      [HttpPost("/start")]
+      public ActionResult StartGame()
+      {
+        Game.DeckGenerator();
+        Game.StartGame(int.Parse(Request.Form["player-amount"]));
+        Player player = Player.Find(1);
+
+        return View(player.GetHand());
       }
     }
 }
