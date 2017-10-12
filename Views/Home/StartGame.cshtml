@@ -13,7 +13,9 @@
     <select name="player-choice" id="player-choice">
     @foreach(var person in Model)
     {
-      <option>player @person.Id</option>
+      if (@person.Id != @player.Id){
+        <option>player @person.Id</option>
+      }
     }
     </select>
     <button type="submit" name="button">Do you have any...</button>
